@@ -1,0 +1,40 @@
+@import "scss/abstracts/variables";
+@import "scss/abstracts/colors";
+
+@import "scss/base/vars-global";
+@import "scss/base/mixins";
+@import "scss/base/colors";
+@import "scss/base/animations";
+@import "scss/base/responsive-helpers";
+@import "scss/base/fonts";
+@import "scss/base/typography";
+@import "scss/base/layout";
+@import "scss/base/misc";
+
+@import "scss/components/inputs";
+@import "scss/components/scrollbar";
+
+@import "scss/components/people";
+@import "scss/components/header/header";
+@import "scss/components/header/create-ui";
+@import "scss/components/header/event-nav";
+@import "scss/components/header/event-header";
+
+// TODO: require deeper changes
+@import "scss/components/general-ui/waiting-indicator";
+@import "scss/components/general-ui/code-editor";
+@import "scss/components/general-ui/image-editor";
+
+// TODO: require deeper changes
+@import "scss/components/create-event/panel";
+@import "scss/components/create-event/colors";
+@import "scss/components/create-event/color-picker";
+
+@import "scss/components/create-event/editor";
+
+// TODO: requires deeper changes
+@import "scss/components/content/editing-options";
+
+@import "scss/shared/divider";
+
+@import "scss/base/helpers";

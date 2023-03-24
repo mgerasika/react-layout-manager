@@ -1,0 +1,114 @@
+
+// TODO: make this universal
+.sb-show-main {
+	min-width: auto;
+	font-family: 'Roboto', sans-serif;
+	color: white;
+	background-color: #1f1f24;
+
+	h1 {
+		color: white;
+	}
+
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: #e5e4ec;
+	}
+
+	.info-table {
+
+		th {
+			color: white;
+		}
+
+		td {
+			color: #e5e4ec;
+		}
+	}
+}
+
+#story-root {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 40px;
+}
+
+.storybook-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 24px;
+}
+
+.storybook-chat {
+	min-width: 320px;
+	padding: 15px;
+	background-color: #1a1a1f;
+	border-radius: 16px;
+}
+
+.sb-icon-props-wrapper {
+
+	.icon-props {
+		display: flex;
+		align-items: center;
+		font-size: 24px;
+
+		& + .icon-props {
+			margin-top: 20px;
+		}
+
+		span {
+			margin: 5px;
+		}
+	}
+}
+
+.sb-icon-list-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex: 1 1 100%;
+
+	.icon-list-item {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 260px;
+		min-height: 100px;
+		margin: 8px 8px 24px;
+		padding: 16px 8px;
+		overflow: hidden;
+		border: 1px solid currentColor;
+		border-radius: 12px;
+
+		.info-line {
+			display: flex;
+			flex-direction: column;
+			padding-top: 16px;
+			text-align: center;
+		}
+
+		.title {
+			min-width: 100px;
+			max-width: 100%;
+			padding: 0 8px;
+			font-size: 18px;
+			color: #ff443a;
+		}
+	}
+}
+
+.moderator-layout {
+
+	.cell {
+		padding: 16px;
+		outline: 1px dotted #fff;
+	}
+}

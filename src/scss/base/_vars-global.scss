@@ -1,0 +1,209 @@
+//************************************************************
+//
+// Global Layout sizing (Width, Height, Breakpoints, etc..)
+//
+//************************************************************
+
+// Breakpoints
+
+$break-xxs: 320px;
+$break-xs: 480px;
+$break-sm: 640px;
+$break-med: 768px;
+$break-lrg: 1024px;
+$break-xlrg: 1120px;
+$break-xxlrg: 1440px;
+
+// Layouts - Large / Small
+
+$content-max-width: 1240px;
+$content-module-max-width: 800px;
+$layout-column-l: 64%;
+$layout-column-s: 36%;
+
+//************************************************************
+// Global Element z-indexes (by order of z-index)
+//************************************************************
+
+$z-index-alert: 100;
+$z-index-lightbox: 98;
+$z-index-modal: 96;
+$z-index-tabs: 96;
+$z-index-overlay: 94;
+$z-index-video-overlay: 93;
+$z-index-drawer: 92;
+$z-index-loader: 91;
+$z-index-user-menu-btn: 91;
+$z-index-user-menu: 90;
+$z-index-header: 89;
+$z-index-video-wrapper: 88;
+$z-index-tabbar: 88;
+$z-index-dialog: 88;
+$z-index-popover: 87;
+
+//************************************************************
+// Global Padding and Margins
+//************************************************************
+
+// Containers
+
+$global-padding: 40px;
+$mobile-padding: 12px;
+
+// Text items
+
+$margin-standard: 20px 0;
+$margin-heading: 40px 0 20px;
+$margin-text: $margin-standard;
+$margin-list: $margin-standard;
+$padding-list: 0 0 0 30px;
+
+// dialog sizes
+
+$dialog-size-small: 400px;
+$dialog-size-medium: 500px;
+$dialog-size-large: 600px;
+
+// Fields
+
+$margin-field: 20px 0;
+
+$padding-field-small: 5px 15px;
+
+$padding-field-top: 10px;
+$padding-field: $padding-field-top 15px;
+$padding-field-dynamic-focused: 16px 15px 4px;
+
+$padding-field-large-top: 16px;
+$padding-field-large: $padding-field-large-top 15px;
+$padding-field-large-dynamic-focused: 25px 15px 7px;
+
+$padding-field-minimal: 0;
+
+$padding-field-textarea: 12px 15px;
+$padding-field-textarea-dynamic: $padding-field-large-top 15px;
+
+// Buttons
+
+$padding-button-xsmall: 5px 12px;
+$padding-button-dropdown: 6px 20px 5px 10px;
+$padding-button-small: 9px 15px;
+$padding-button: 11px 20px;
+$padding-button-large: 14px 20px;
+
+$button-height-xsmall: 27px;
+$button-height-small: 37px;
+$button-height: 42px;
+$button-height-large: 54px;
+
+// Checkboxes and Radio buttons
+
+$margin-checkbox: 15px 0;
+
+// Modal Padding
+
+$modal-padding-vertical: 30px;
+$modal-padding-horizontal: 40px;
+$modal-padding: $modal-padding-vertical $modal-padding-horizontal;
+
+//************************************************************
+// Special Element Sizing
+//************************************************************
+
+$header-size-mobile: 48px;
+$header-size: 108px;
+$mobile-tabbar-size: 48px;
+$avatar-size-sm: 32px;
+$avatar-size-md: 42px;
+$avatar-size-lg: 62px;
+$avatar-size-xlg: 80px;
+$video-height: 56.25%;
+$logo-max-height: 90px;
+$logo-min-height: 55px;
+$logo-max-width: 700px;
+$reg-form-max-width: 340px;
+$module-image-maxheight: 600px;
+
+// $border-bottom: 1px solid rgba( $text-gray, .1 );
+
+$easing: cubic-bezier(0, 0.51, 0.28, 1.35);
+
+//************************************************************
+// Border Radius
+//************************************************************
+
+$radius-small: 3px;
+$radius-medium: 16px;
+$radius-large: 24px;
+
+$radius-modal: $radius-large;
+$radius-container: $radius-medium;
+$radius-button: $radius-small;
+$radius-field: $radius-small;
+
+//************************************************************
+// Global Transition Variables
+//************************************************************
+
+$field-transition-duration: 0.15s;
+// popover.js should be updated if $popover-transition-duration is changed
+$popover-transition-duration: 100ms;
+$hover-transition-duration: 0.18s;
+$menu-transition-duration: 0.2s;
+$modal-transition-duration: 0.28s;
+$fade-transition-duration: 0.5s;
+$alert-transition-duration: 0.3s;
+$fixed-header-duration: 0.4s;
+$login-pane-transition-duration: 0.3s;
+
+//************************************************************
+// Popovers
+//************************************************************
+
+$popover-offset: 3px;
+$popover-padding: 20px;
+$tooltip-padding: 10px 12px;
+$tooltip-offset: 12px;
+
+//************************************************************
+// Modals
+//************************************************************
+
+$modal-body-max-height: 540px;
+$modal-size-small: 420px;
+$modal-size-medium: 640px;
+$modal-size-large: 800px;
+
+//************************************************************
+// Typography (from _typography.scss)
+//************************************************************
+
+$font-family-opensans: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$font-family-roboto: 'Roboto', sans-serif;
+
+$_272px: 272px;
+$_254px: 254px;
+$_221px: 211px;
+$_204px: 204px;
+$_200px: 200px;
+$_152px: 152px;
+$_120px: 120px;
+$_50px: 50px;
+$_48px: 48px;
+$_46px: 46px;
+$_42px: 42px;
+$_40px: 40px;
+$_36px: 36px;
+$_34px: 34px;
+$_32px: 32px;
+$_24px: 24px;
+$_20px: 20px;
+$_18px: 18px;
+$_16px: 16px;
+$_14px: 14px;
+$_12px: 12px;
+$_10px: 10px;
+$_8px: 8px;
+$_6px: 6px;
+$_3px: 3px;
+$_1px: 1px;

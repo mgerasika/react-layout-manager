@@ -1,0 +1,107 @@
+
+@import '/base/colors';
+@import '/base/vars-global';
+
+$font-family-opensans: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$font-family-roboto: 'Roboto', sans-serif;
+
+$_272px: 272px;
+$_254px: 254px;
+$_221px: 211px;
+$_204px: 204px;
+$_200px: 200px;
+$_152px: 152px;
+$_120px: 120px;
+$_50px: 50px;
+$_48px: 48px;
+$_46px: 46px;
+$_42px: 42px;
+$_40px: 40px;
+$_36px: 36px;
+$_34px: 34px;
+$_32px: 32px;
+$_24px: 24px;
+$_20px: 20px;
+$_18px: 18px;
+$_16px: 16px;
+$_14px: 14px;
+$_12px: 12px;
+$_10px: 10px;
+$_8px: 8px;
+$_6px: 6px;
+$_3px: 3px;
+$_1px: 1px;
+
+@mixin radius-16 {
+	border-radius: 16px;
+}
+
+@mixin radius-12 {
+	border-radius: 12px;
+}
+
+@mixin radius-8 {
+	border-radius: 8px;
+}
+
+@mixin radius-4 {
+	border-radius: 4px;
+}
+
+@mixin radius-full {
+	border-radius: 100px;
+}
+
+@mixin radius-32 {
+	border-radius: 32px;
+}
+
+@mixin flex-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@mixin flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin absolute-fill {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+@mixin break-min($point) {
+	@media screen and (min-width: $point) {
+		@content;
+	}
+}
+
+@mixin break-max($point) {
+	@media screen and (max-width: $point) {
+		@content;
+	}
+}
+
+@mixin break-min-height($point) {
+	@media screen and (min-height: $point) {
+		@content;
+	}
+}
+
+@mixin break-max-height($point) {
+	@media screen and (max-height: $point) {
+		@content;
+	}
+}
+
+@mixin orientation($orientation) {
+	@media only screen and (orientation: $orientation) {
+		@content;
+	}
+}

@@ -1,0 +1,82 @@
+@import "../../scss/deps";
+
+[class^="ev-icon-"],
+[class*="ev-icon-"] {
+  /* Icon sizes */
+  &.icon-giant {
+    font-size: 24px;
+  }
+
+  &.icon-large {
+    font-size: 20px;
+  }
+
+  &.icon-medium {
+    font-size: 16px;
+  }
+
+  &.icon-regular {
+    font-size: 14px;
+  }
+
+  &.icon-small {
+    font-size: 12px;
+  }
+
+  &.icon-tiny {
+    font-size: 5px;
+  }
+
+  /* Icon positioning */
+  &.icon-left {
+    margin-right: $ev-gap-x2;
+  }
+
+  &.icon-right {
+    margin-left: $ev-gap-x2;
+  }
+
+  &.icon-order-right {
+    order: 99;
+    margin-left: $ev-gap-x2;
+  }
+
+  &.icon-order-left {
+    order: -1;
+    margin-right: $ev-gap-x2;
+  }
+
+  /* Icon colors */
+  &.icon-gray {
+    color: $border-light-gray;
+  }
+
+  &.icon-med-light-gray {
+    color: $med-light-gray;
+  }
+
+  &.icon-red {
+    color: $red;
+  }
+
+  &.icon-green {
+    color: $green;
+  }
+
+  &.icon-white {
+    color: $white;
+  }
+
+  &.icon-black {
+    color: $darker-gray;
+  }
+
+  // Not found
+  // &.icon-light-black {
+  //   color: $border-light-gray;
+  // }
+
+  &.icon-cyan {
+    color: $cyan;
+  }
+}

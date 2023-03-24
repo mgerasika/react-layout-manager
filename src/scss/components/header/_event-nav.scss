@@ -1,0 +1,62 @@
+.event-nav {
+	max-height: calc(100vh - 68px - 28px);
+	overflow: auto;
+
+	nav {
+		display: flex;
+		flex-direction: column;
+
+		div {
+			@include flex-center;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			width: 80px;
+			height: 70px;
+			margin: 16px 8px;
+			font-size: 12px;
+			line-height: 16px;
+			font-weight: bold;
+			letter-spacing: 0.4px;
+			color: $white;
+
+			button {
+				width: 48px;
+				height: 48px;
+				padding: 0;
+				background: #312F38;
+				border-radius: 16px;
+				@include flex-center;
+
+				&.selected {
+					background-color: $gray-600;
+				}
+
+				svg {
+					margin: 0;
+				}
+			}
+
+			&.active {
+
+				&::after {
+					content: '';
+					position: absolute;
+					//top: 42px;
+					right: -1px;
+					//right: calc(50% - 10px);
+					display: block;
+					width: 3px;
+					height: 80px;
+					background-color: $cyan;
+					border-radius: 1.5px;
+				}
+			}
+
+			&:visited {
+				color: $white;
+			}
+		}
+	}
+}

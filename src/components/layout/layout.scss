@@ -1,0 +1,135 @@
+@import "../../scss/deps";
+
+$layout-container-gap: $ev-gap-x2;
+$layout-grid-gap: ($layout-container-gap / 2);
+
+.layout {
+  @include scrollbar;
+  flex-grow: 1;
+  padding: $layout-container-gap;
+  overflow: auto hidden;
+
+  .layout-rows {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+    max-width: 100%;
+    min-height: 0;
+    height: 100%;
+
+    div[role="button"] {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+
+  .layout-row {
+    position: relative;
+    display: flex;
+    min-height: 0;
+    margin-right: -($layout-grid-gap);
+    margin-left: -($layout-grid-gap);
+    padding-top: $layout-grid-gap;
+    padding-bottom: $layout-grid-gap;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  .layout-cells {
+    display: flex;
+    flex: 1 0;
+    max-width: 100%;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .layout-cell {
+    position: relative;
+    display: flex;
+    // flex-direction: column;
+    flex: 1 0 0;
+    max-width: 100%;
+    padding-right: $layout-grid-gap;
+    padding-left: $layout-grid-gap;
+
+    &.root-level {
+      > .layout-cell:first-child {
+        > :first-child::after {
+          content: "";
+          position: absolute;
+          left: 100%;
+          width: $layout-container-gap;
+          height: 1px;
+        }
+      }
+    }
+  }
+
+  .layout-separator {
+    position: absolute;
+    z-index: 1;
+
+    &.dragging {
+      background: rgba($primary, 0.2);
+      border: 1px solid rgba($primary, 0.8);
+      border-radius: 12px;
+    }
+  }
+
+  .layout-separator-row {
+    left: $layout-grid-gap;
+    right: $layout-grid-gap;
+    bottom: -$layout-grid-gap;
+    height: $layout-container-gap;
+    cursor: ns-resize;
+
+    &.dragging {
+      top: 0;
+      bottom: -$layout-container-gap;
+      min-height: 100px;
+      height: auto;
+    }
+  }
+
+  .layout-separator-cell {
+    position: absolute;
+    top: 0;
+    right: -$layout-grid-gap;
+    width: $layout-container-gap;
+    height: 100%;
+    cursor: ew-resize;
+
+    &.dragging {
+      left: $layout-grid-gap;
+      min-width: 100px;
+      width: auto;
+    }
+  }
+
+  .layout-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+    max-width: 100%;
+    min-height: 0;
+    height: 100%;
+    margin-bottom: $ev-gap-x2;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    div[role="button"] {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+}

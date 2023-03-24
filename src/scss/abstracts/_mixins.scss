@@ -1,0 +1,79 @@
+
+@mixin flex-center ($display: flex, $align-items: center, $justify-content: center) {
+	display: $display;
+	@if $align-items != null {
+		align-items: $align-items;
+	}
+	@if $justify-content != null {
+		justify-content: $justify-content;
+	}
+}
+
+@mixin size ($w, $h: null) {
+	width: $w;
+	@if $h {
+		height: $h;
+	}
+	@else {
+		height: $w;
+	}
+}
+
+@mixin circle ($r, $center-content: true, $rest...) {
+	@include size($r);
+	@if $center-content {
+		@include flex-center($rest...);
+	}
+	border-radius: 50%;
+}
+
+@mixin generate-displays ($list: ()) {
+	@each $display in $list {
+		.d-#{$display} {
+			display: $display;
+		}
+	}
+}
+
+@mixin line-clamp ($lines: 2) {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lines;
+}
+
+@mixin text-ellipsis {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+@mixin position-center ($position: absolute) {
+	position: $position;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin scrollbar {
+
+	::-webkit-scrollbar {
+		width: $ev-scroll-width;
+		height: $ev-scroll-width;
+	}
+
+	::-webkit-scrollbar-thumb {
+		visibility: hidden;
+		background-color: rgba($gray-500, 0.7);
+		border-radius: $ev-scroll-width / 2;
+	}
+
+	:hover::-webkit-scrollbar-thumb,
+	::-webkit-scrollbar-thumb:hover {
+		visibility: visible;
+	}
+
+	::-webkit-scrollbar-corner {
+		display: none;
+	}
+}

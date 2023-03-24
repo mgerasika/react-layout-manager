@@ -1,0 +1,61 @@
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background-color: $dark-gray;
+}
+
+body {
+	width: 100%;
+	overflow-x: hidden;
+
+	&.modal-open {
+		overflow: hidden;
+	}
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: calc(100vh - 72px);
+	margin: 0 auto;
+	background-color: $dark-gray;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 1088px;
+}
+
+.row {
+	display: flex;
+	flex: 1;
+}
+
+// Small devices (landscape phones, 576px and up)
+
+/* stylelint-disable block-no-empty */
+@media (min-width: 576px) {
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+}
+
+/* stylelint-enable block-no-empty */

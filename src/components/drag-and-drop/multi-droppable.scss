@@ -1,0 +1,29 @@
+
+@import '../../scss/deps';
+
+.multi-droppable {
+	@include size(100%);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 200;
+
+	.multi-droppable-sector {
+		height: 25%;
+
+		&.central {
+			height: 50%;
+
+			.droppable-hover {
+				transform: translateY(-25%);
+			}
+		}
+
+		&.bottom {
+
+			.droppable-hover {
+				transform: translateY(-50%);
+			}
+		}
+	}
+}

@@ -1,0 +1,430 @@
+
+.panel-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 0;
+	height: calc(100vh - 72px);
+	opacity: 0;
+	background-color: $med-gray;
+
+	.event-panel-container {
+		width: 360px;
+
+		.main-nav-items-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 68px;
+			padding: 32px 24px 18px;
+
+			.title {
+				margin: 0 auto 0 0;
+
+				h6 {
+					margin: 0;
+	
+					button {
+						display: flex;
+						align-items: center;
+						
+						span {
+							font-weight: bold;
+							color: #fff;
+							margin-left: 9px;
+						}
+					}
+				}
+			}
+
+			.main-nav-items-header-add-session {
+				color: $cyan;
+				font-size: 12px;
+				margin-right: 18px;
+			}
+		}
+	}
+
+	.panel-header {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		width: 100%;
+		height: 98px;
+		padding: 8px 24px;
+		border-bottom: 1px solid $border-gray;
+
+		.tab-header-container {
+			font-size: 16px;
+			line-height: 22px;
+			font-weight: 500;
+		}
+
+		.title {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			margin-bottom: 16px;
+
+			button {
+				padding: 0;
+			}
+
+			h6 {
+				margin: 0;
+			}
+		}
+
+		&.session {
+			height: 76px;
+			border-bottom: none;
+			align-items: center;
+		}
+
+		.panel-session-title {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			justify-content: space-between;
+
+			.left {
+				display: flex;
+				align-items: center;
+			}
+
+			.right {
+				display: flex;
+				align-items: center;
+				width: 48px;
+				justify-content: space-between;
+			}
+
+			button {
+				margin: 0;
+				padding: 0;
+			}
+
+			h6 {
+				margin: 0 0 0 8px;
+			}
+		}
+	}
+
+	.panel-session-type {
+		display: flex;
+		align-items: center;
+		width: 312px;
+		height: 64px;
+		padding: 0 16px;
+		background-color: $image-gray;
+		border: 1px solid $med-gray;
+		user-select: none;
+		@include radius-12;
+		margin: 0 24px;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 16px;
+	}
+
+	.panel-body {
+		width: 100%;
+		max-height: 100%;
+		height: calc(100vh - 103px - 72px); // 72px is main header, 103px is panel header (should be moved out to global variables)
+		// height: 768px;
+		padding: 16px 24px;
+		overflow: auto;
+
+		&.no-padding {
+			padding: 0;
+		}
+
+		.panel-tabs-header {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 16px;
+			
+			button {
+				padding: 0;
+			}
+
+		}
+
+		.panel-structure-list {
+
+			.panel-structure-item {
+				display: flex;
+				align-items: center;
+				width: 312px;
+				height: 64px;
+				margin: 8px 0;
+				padding: 0 16px;
+				background-color: $image-gray;
+				border: 1px solid $med-gray;
+				user-select: none;
+				@include radius-12;
+				font-weight: 500;
+				font-size: 14px;
+				line-height: 16px;
+			}
+
+			.panel-structure-footer {
+				display: flex;
+				align-items: center;
+
+				button {
+					padding-left: 0;
+
+					span {
+						font-weight: bold;
+						font-size: 12px;
+						line-height: 16px;
+						letter-spacing: 0.4px;
+						color: $cyan;
+					}
+				}	
+			}
+		}
+	}
+
+	h3 {
+		padding: 16px 24px 0;
+		text-transform: capitalize;
+	}
+
+	a {
+		text-decoration: none;
+		color: $white;
+
+		&:visited {
+			text-decoration: inherit;
+			color: interit;
+		}
+	}
+
+	.panel-top {
+		flex: 1;
+		height: calc(100vh - 72px - 65px);
+		padding: 16px 24px;
+		overflow-y: auto;
+
+		.tooltip {
+
+			svg {
+				margin-bottom: 3px;
+			}
+
+			.tooltip-text {
+				white-space: inherit;
+			}
+		}
+	}
+
+	.react-datepicker-popper {
+		// needs to be here to effect both the datepickers in both the add and edit session modals
+		// needs the !importants to override ReactDatepickers inline positioning
+		position: fixed !important;
+		top: inherit !important;
+		margin-top: -38px;
+	}
+
+	.sessions-lists {
+
+		.sessions-list {
+			margin-top: 16px;
+
+			.session-item {
+				margin-bottom: 0;
+				padding: 16px 0 16px 24px;
+
+				.collapsing-list-header > span {
+					width: calc(100% - 32px);
+				}
+
+				.session-languages {
+					padding-top: 8px;
+
+					a {
+						display: block;
+						padding: 8px 24px;
+						font-size: 14px;
+						font-weight: 500;
+						text-decoration: none;
+						color: $white;
+
+						&:visited {
+							color: $white;
+						}
+					}
+				}
+
+				.edit-sessions-container {
+
+					.navigation-dropdown.edit-sessions {
+						opacity: 0;
+						transition: 0.3s;
+
+						.navdrop-title {
+							display: flex;
+							justify-content: center;
+
+							svg {
+								top: 0;
+								margin: 0;
+							}
+						}
+
+						.navdrop-list {
+							position: fixed;
+							top: inherit;
+							left: inherit;
+							width: 185px;
+							margin-top: 4px;
+
+							& > button {
+								padding: 5px 16px;
+								color: $med-light-gray;
+								border-radius: 0;
+
+								&:hover {
+									color: $white;
+								}
+							}
+						}
+					}
+
+					.delete-message {
+						margin: 24px 0 32px;
+						line-height: 24px;
+					}
+
+					.modal-body {
+						overflow-x: hidden;
+
+						span button svg {
+							position: inherit;
+							width: inherit;
+							height: inherit;
+							margin: inherit;
+
+							path {
+								fill: $border-light-gray;
+							}
+						}
+					}
+				}
+
+				&:hover {
+
+					.navigation-dropdown.edit-sessions {
+						opacity: 1;
+					}
+				}
+			}
+		}
+
+		.no-sessions {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 24px;
+
+			h5 {
+				opacity: 0.4;
+			}
+		}
+
+		.add-session {
+			position: relative;
+			top: -4px;
+			margin: 0;
+			padding: 0;
+			font-size: 12px;
+			font-weight: 700;
+			white-space: nowrap;
+			color: $cyan;
+
+			svg {
+				position: relative;
+				top: 2px;
+				margin-right: 6px;
+
+				path {
+					fill: $cyan;
+				}
+			}
+		}
+	}
+
+	.event-registration {
+		@include flex-between;
+		display: relative;
+
+		h5 {
+			opacity: 1;
+			transition: 150ms opacity;
+			cursor: pointer;
+
+			&.disabled {
+				opacity: 0.4;
+				pointer-events: none;
+			}
+
+			button.no-style {
+				position: relative;
+				top: -1px;
+				right: -1px;
+				margin: 0;
+				padding: 0;
+			}
+		}
+	}
+
+	.settings-container {
+		min-height: 65px;
+		border-top: 1px solid $border-gray;
+
+		.settings-label {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 65px;
+			padding: 0 24px;
+
+			h3 {
+				margin: 0;
+				padding: 0;
+			}
+
+			button {
+				margin: 0;
+				padding: 0;
+				background: transparent;
+			}
+		}
+
+		ul {
+			padding: 0 24px;
+
+			li {
+				height: 40px;
+				list-style-type: none;
+
+				a {
+					font-size: 18px;
+					font-weight: 700;
+				}
+			}
+		}
+	}
+
+	&.open {
+		width: 360px;
+		opacity: 1;
+	}
+}

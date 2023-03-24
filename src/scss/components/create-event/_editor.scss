@@ -1,0 +1,304 @@
+
+// .editor-wrapper {
+// 	--background-color: white;
+// 	--color: black;
+// }
+
+.editor-wrapper {
+	display: flex;
+	justify-content: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border: 1px solid transparent;
+	transition: 150ms border;
+
+	.module-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		width: 100%;
+		max-width: 1440px;
+		margin: 0 auto;
+		padding: 100px 150px;
+	}
+
+	&.session {
+		margin-bottom: 36px;
+	}
+
+	&.blank-section {
+		padding: 40px 0;
+		background-color: var(--containerColor);
+	}
+
+	&:hover {
+		border: 1px dashed $alt-gray;
+	}
+}
+
+.sessions-container,
+.structure-container {
+	// margin: 10px;
+
+	.structure-list {
+
+		.session-option-container {
+			display: flex;
+			align-items: center;
+			width: 312px;
+			height: 64px;
+			margin: 8px 0;
+			padding: 0 16px;
+			background-color: $image-gray;
+			border: 1px solid $med-gray;
+			user-select: none;
+			@include radius-12;
+
+			&:hover {
+				cursor: pointer;
+
+				button.options {
+					display: inline-flex;
+				}
+			}
+		}
+
+		.add-custom-section {
+			color: $cyan;
+
+			svg {
+				margin-right: 8px;
+			}
+		}
+	}
+
+	.custom-section-modal {
+		display: grid;
+		grid-template-columns: 1fr 3fr;
+
+		.custom-section-select {
+
+			ul {
+				margin: 0;
+				padding: 0;
+
+				li {
+					display: flex;
+					align-items: center;
+					height: 40px;
+					padding-left: 16px;
+					font-weight: 500;
+					list-style-type: none;
+					color: $border-light-gray;
+					background-color: transparent;
+					transition: 150ms background-color, 150ms color;
+					cursor: pointer;
+					@include radius-full;
+
+					span {
+						display: inline-block;
+					}
+
+					button {
+						font-size: inherit;
+						color: inherit;
+					}
+
+					&:hover,
+					&.active {
+						background-color: $med-gray;
+					}
+
+					&.active {
+						color: $white;
+					}
+				}
+			}
+		}
+	}
+
+	.modal {
+
+		.subtitle {
+			display: inline-block;
+			margin-bottom: 24px;
+			font-weight: 500;
+			color: $border-light-gray;
+		}
+
+		.custom-html-container {
+			margin-bottom: 24px;
+		}
+	}
+
+	.session-layout-options {
+		padding: 16px;
+
+		.session-layout-type {
+			margin-bottom: 16px;
+
+			.session-layout-label {
+				display: inline-block;
+				margin-bottom: 8px;
+				font-size: 14px;
+				font-weight: 500;
+			}
+
+			.session-layout-row {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 16px;
+
+				.session-layout-option {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					width: 100%;
+					height: 111px;
+					padding: 11px 15px;
+					border: 1px solid $border-light-gray;
+					transition: 150ms filter, 150ms border;
+					cursor: pointer;
+					@include radius-8;
+
+					img {
+						width: 100%;
+					}
+
+					label {
+						margin-top: 15px;
+						font-size: 14px;
+						font-weight: 500;
+					}
+
+					&:hover {
+						filter: contrast(1.15);
+						border: 1px solid darken($border-light-gray, 10%);
+					}
+
+					&.active {
+						border: 1px solid $cyan;
+					}
+				}
+			}
+		}
+	}
+}
+
+.editor-main-border {
+	width: 100%;
+	padding: 24px;
+	background-color: $off-black;
+	overflow: hidden;
+}
+
+.editor {
+
+	width: 1440px;
+	height: 100%;
+	transition: 0.5s transform;
+	transform-origin: 50% 35%;
+
+	font-family: var(--bodyFont);
+	color: var(--bodyTextColor);
+	background-color: var(--containerColor);
+
+	.large-button {
+		border-radius: 0;
+
+		label {
+			color: $dark-gray;
+		}
+
+		svg {
+
+			path {
+				fill: $dark-gray;
+			}
+		}
+	}
+}
+
+
+//panel width is 360, left nav is ~100px and padding is 50px so 1950px means the editor will be 1440
+@media only screen and (min-width: 1951px) {
+	.editor:not(.no-scale) {
+	  transform: scale(1) ;
+	}
+}
+@media only screen and (max-width: 1950px) {
+	.editor:not(.no-scale) {
+		transform: scale(1);
+
+		&.panel-open {
+			transform: scale(0.9);
+		}
+	}
+}
+@media only screen and (max-width: 1800px) {
+	.editor:not(.no-scale) {
+		transform: scale(0.9);
+
+		&.panel-open {
+			transform: scale(0.8);
+		}
+	}
+}
+
+@media only screen and (max-width: 1650px) {
+	.editor:not(.no-scale) {
+		transform: scale(0.8);
+
+		&.panel-open {
+			transform: scale(0.7);
+		}
+	}
+}
+
+@media only screen and (max-width: 1500px) {
+	.editor:not(.no-scale) {
+		transform: scale(0.7);
+
+		&.panel-open {
+			transform: scale(0.6);
+		}
+	}
+}
+@media only screen and (max-width: 1350px) {
+	.editor:not(.no-scale) {
+		transform: scale(0.6);
+
+		&.panel-open {
+			transform: scale(0.5);
+		}
+	}
+}
+@media only screen and (max-width: 1200px) {
+	.editor:not(.no-scale) {
+		transform: scale(0.5);
+
+		&.panel-open {
+			transform: scale(0.4);
+		}
+	}
+}
+@media only screen and (max-width: 1050px) {
+	.editor:not(.no-scale) {
+		transform: scale(0.4);
+
+		&.panel-open {
+			transform: scale(0.3);
+		}
+	}
+}
+@media only screen and (max-width: 900px) {
+	.editor:not(.no-scale) {
+		transform: scale(0.3);
+
+		&.panel-open {
+			transform: scale(0.2);
+		}
+	}
+}

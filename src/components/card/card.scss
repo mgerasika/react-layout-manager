@@ -1,0 +1,92 @@
+@import "../../scss/deps";
+
+.card {
+  border: 1px solid white;
+  position: relative;
+  padding: 0 $ev-gap-x3;
+  overflow-y: auto;
+  background-color: $gray-900;
+  border-radius: 12px;
+
+  &.dragging {
+    background-color: $gray-600;
+
+    .card-header {
+      background: none;
+    }
+  }
+
+  &.card-header-only {
+    .card-header {
+      border-radius: inherit;
+    }
+  }
+
+  // TODO: temporary styles. Delete after tooltip fix
+  .smart-tooltip-content {
+    z-index: 3;
+  }
+
+  .card-header {
+    @include flex-center($justify-content: null);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin: 0 (-$ev-gap-x3);
+    padding: $ev-gap-x4 $ev-gap-x3;
+    background: linear-gradient(
+      180deg,
+      rgba($gray-900, 0.8) 0%,
+      rgba($gray-900, 0.25) 100%
+    );
+    border-radius: 12px 12px 0 0;
+    backdrop-filter: blur(10px);
+  }
+
+  .card-header-icon {
+    @include flex-center(inline-flex);
+    margin: 0 $ev-gap-x2 0 $ev-gap-x1;
+    cursor: move;
+  }
+
+  .card-title {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 700;
+    color: $gray-100;
+
+    .count {
+      @include flex-center(inline-flex, $justify-content: null);
+      margin-left: $ev-gap-x1;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+      color: $gray-400;
+
+      &::before {
+        @include circle(4px, false);
+        content: "";
+        margin-right: $ev-gap-x1;
+        background-color: $gray-400;
+      }
+    }
+  }
+
+  .card-btn-close {
+    position: absolute;
+    top: 50%;
+    right: $ev-gap-x3;
+    padding: $ev-gap-x1;
+    transform: translateY(-50%);
+  }
+
+  .card-body {
+    padding-bottom: $ev-gap-x3;
+  }
+
+  .message-card {
+    margin-top: $ev-gap-x2;
+  }
+}

@@ -1,0 +1,13 @@
+
+@import '../../scss/deps';
+
+.droppable {
+	@include size(100%);
+
+	.droppable-hover {
+		height: 200%;
+		background: rgba($primary, 0.2);
+		border: 1px solid rgba($primary, 0.8);
+		border-radius: 12px;
+	}
+}
