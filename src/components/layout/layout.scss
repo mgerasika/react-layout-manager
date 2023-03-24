@@ -4,10 +4,10 @@ $layout-container-gap: $ev-gap-x2;
 $layout-grid-gap: ($layout-container-gap / 2);
 
 .layout {
-  @include scrollbar;
   flex-grow: 1;
   padding: $layout-container-gap;
   overflow: auto hidden;
+  height: 100%;
 
   .layout-rows {
     display: flex;
@@ -89,7 +89,6 @@ $layout-grid-gap: ($layout-container-gap / 2);
     bottom: -$layout-grid-gap;
     height: $layout-container-gap;
     cursor: ns-resize;
-
     &.dragging {
       top: 0;
       bottom: -$layout-container-gap;

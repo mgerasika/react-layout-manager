@@ -1,6 +1,11 @@
 import { useDroppable } from "@dnd-kit/core";
 import classNames from "classnames";
-import React, { MutableRefObject, useContext, useMemo } from "react";
+import React, {
+  MutableRefObject,
+  useCallback,
+  useContext,
+  useMemo,
+} from "react";
 import { Draggable, DraggableProps } from "../drag-and-drop/draggable";
 import { Droppable } from "../drag-and-drop/droppable";
 import { MultiDroppable } from "../drag-and-drop/multi-droppable";
@@ -66,7 +71,7 @@ export const Layout = ({ renderView }: Props): JSX.Element => {
     const result = cells.map((cell: ILayoutCell, index): JSX.Element | null => {
       return (
         <LayoutCell
-          key={cell[PRIVATE_SYMBOL]?.tempId}
+          key={cell[PRIVATE_SYMBOL]?.tempId || index}
           cell={cell}
           renderCellContent={renderCellContent}
           nested={nested}
@@ -79,17 +84,20 @@ export const Layout = ({ renderView }: Props): JSX.Element => {
     return <>{result}</>;
   };
 
-  const handleDragStart = ({
-    node,
-    info,
-  }: {
-    node: MutableRefObject<HTMLElement | null>;
-    info: IDragInfo;
-  }) => {
-    if (node.current) {
-      doStartDrag({ node, info });
-    }
-  };
+  const handleDragStart = useCallback(
+    ({
+      node,
+      info,
+    }: {
+      node: MutableRefObject<HTMLElement | null>;
+      info: IDragInfo;
+    }) => {
+      if (node.current) {
+        doStartDrag({ node, info });
+      }
+    },
+    [doStartDrag]
+  );
 
   const renderCellContent = (cell: ILayoutCell): JSX.Element => {
     if (cell.rows?.length) {
@@ -102,7 +110,7 @@ export const Layout = ({ renderView }: Props): JSX.Element => {
     const result = rows.map((row, index) => {
       return (
         <LayoutRow
-          key={row[PRIVATE_SYMBOL]?.tempId}
+          key={row[PRIVATE_SYMBOL]?.tempId || index}
           row={row}
           renderCells={renderCells}
           nested={nested}
@@ -156,6 +164,7 @@ const LayoutRow = ({
       ref={setNodeRef}
       className="layout-row full-height"
       style={{
+        height: row.height ? row.height + "%" : undefined,
         minHeight: row.height ? row.height + "%" : undefined,
         maxHeight: row.height ? row.height + "%" : undefined,
       }}
@@ -229,7 +238,6 @@ const RowSeparator = ({
         dragging: isDragging,
       })}
       onDragStart={onDragStart}
-      isDragging={isDragging}
       isCustomDragElement={true}
       renderContent={(draggableProps) => (
         <div style={{ width: "100%" }} {...draggableProps}></div>
@@ -264,7 +272,6 @@ const CellSeparator = ({
         type: "resize-cell",
         viewName: cell.viewName,
       }}
-      isDragging={isDragging}
       isCustomDragElement={true}
       renderContent={(draggableProps) => (
         <div style={{ width: "100%" }} {...draggableProps}></div>
@@ -301,7 +308,6 @@ const LayoutView = ({
     <MultiDroppable id={viewName} isDragging={isDragging}>
       <Draggable
         info={{ id: viewName, type: "move" }}
-        isDragging={isDragging}
         isCustomDragElement={true}
         renderContent={renderContent}
       >

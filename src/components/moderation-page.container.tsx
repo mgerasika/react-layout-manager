@@ -3,12 +3,12 @@ import { Card } from "./card/card";
 import { COLORS, Icon, ICONS } from "./icon2";
 import { LayoutContext } from "./layout/layout-context.component";
 import { EViewName, ILayoutRow, Layout } from "./layout/layout.component";
-import { EXAMPLE_HORIZONTAL_LAYOUT, useLayout } from "./layout/layout.hook";
+import { EXAMPLE_LAYOUT, useLayout } from "./layout/layout.hook";
 
 export default function ModeratorPageContainer(): JSX.Element {
   const layout = useLayout({
     allViews: Object.values(EViewName).filter((f) => f !== EViewName.Empty),
-    defaultLayout: EXAMPLE_HORIZONTAL_LAYOUT,
+    defaultLayout: EXAMPLE_LAYOUT,
   });
   const {
     rows,
@@ -128,7 +128,9 @@ const LayoutViewContent = ({
           className="flex-grow-1"
           onCloseClick={() => onCloseClick(EViewName.JSON)}
         >
-          <pre>{JSON.stringify(rows || {}, null, 2)}</pre>
+          <pre style={{ display: "block" }}>
+            {JSON.stringify(rows || {}, null, 2)}
+          </pre>
         </Card>
       );
   }
