@@ -1,6 +1,6 @@
 import { useDraggable } from "@dnd-kit/core";
 import classNames from "classnames";
-import React, { ReactNode, useEffect, useMemo } from "react";
+import React, { ReactNode, useEffect, useMemo, useRef } from "react";
 import { IDragInfo } from "../layout/layout.hook";
 
 export type DraggableProps = ReturnType<typeof useDraggable>["listeners"] &
@@ -28,6 +28,7 @@ export function Draggable({
   onMove,
   onDragStart,
 }: Props): JSX.Element {
+  const refIsDragStarted = useRef(false);
   const { attributes, listeners, setNodeRef, transform, node } = useDraggable({
     id: JSON.stringify(info),
   });
@@ -45,11 +46,19 @@ export function Draggable({
   }, [transform, onMove]);
 
   useEffect(() => {
-    if (isDragging  && onDragStart) {
+    if (!transform) {
+      refIsDragStarted.current = false;
+    }
+  }, [transform]);
+
+  useEffect(() => {
+    if (isDragging && onDragStart && !refIsDragStarted.current) {
       let el: HTMLElement | null = node.current;
       while (el) {
         if (el.className.includes("draggable")) {
           onDragStart({ node: ({ current: el } as unknown) as any, info });
+
+          refIsDragStarted.current = true;
           break;
         }
         el = el?.parentElement;

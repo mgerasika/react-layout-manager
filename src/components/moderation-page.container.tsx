@@ -41,7 +41,6 @@ export default function ModeratorPageContainer(): JSX.Element {
               </div>
             }
             viewName={viewName}
-            isDragging={!!activeView}
             onCloseClick={handleCloseClick}
           />
         )}
@@ -51,7 +50,6 @@ export default function ModeratorPageContainer(): JSX.Element {
 }
 
 interface LayoutViewContentProps {
-  isDragging: boolean;
   viewName: EViewName;
   onCloseClick: (viewName: EViewName) => void;
   leftIcon: JSX.Element;

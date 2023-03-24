@@ -29,10 +29,6 @@ export const LayoutContext = ({ layout, children }: Props): JSX.Element => {
       doDragStart: ({ node, info }) => {
         draggableElementRef.current = node.current;
 
-        //   if (el?.style) {
-        //     el.style.border = "1px solid gold";
-        //   }
-
         if (node.current && info.type === "resize-cell") {
           const parent = findParentByClassName(node.current, "layout-cells");
           if (parent) {
