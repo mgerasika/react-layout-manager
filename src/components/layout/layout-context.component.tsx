@@ -1,9 +1,9 @@
 import { DndContext, Modifier } from "@dnd-kit/core";
 import { LayoutRectMap } from "@dnd-kit/core/dist/store";
 import { LayoutRect } from "@dnd-kit/core/dist/types";
-import React, { MutableRefObject, useMemo, useRef } from "react";
+import React, { MutableRefObject, ReactNode, useMemo, useRef } from "react";
 import { EDropArea } from "../drag-and-drop/multi-droppable";
-import { EViewName } from "./layout.component";
+import { EMPTY_VIEW_NAME } from "./layout.component";
 import {
   IDragInfo,
   IDropInfo,
@@ -13,7 +13,7 @@ import {
 
 interface Props {
   layout: ILayoutResult;
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 export const LayoutContext = ({ layout, children }: Props): JSX.Element => {
@@ -152,16 +152,12 @@ export const LayoutContext = ({ layout, children }: Props): JSX.Element => {
           const dropInfo = JSON.parse(over.id) as IDropInfo;
 
           if (dragInfo.type === "move") {
-            if (dropInfo.id === EViewName.Empty) {
-              moveView(
-                dragInfo.id as EViewName,
-                EViewName.Empty,
-                EDropArea.Top
-              );
+            if (dropInfo.id === EMPTY_VIEW_NAME) {
+              moveView(dragInfo.id, EMPTY_VIEW_NAME, EDropArea.Top);
             } else {
               moveView(
-                dragInfo.id as EViewName,
-                dropInfo.id as EViewName,
+                dragInfo.id,
+                dropInfo.id,
                 dropInfo.dropArea as EDropArea
               );
             }

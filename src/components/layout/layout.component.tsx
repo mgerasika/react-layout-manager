@@ -16,15 +16,7 @@ import {
 import { IDragInfo } from "./layout.hook";
 import "./layout.scss";
 
-export enum EViewName {
-  Empty = "Empty",
-  JSON = "JSON",
-  Presenter = "Presenter",
-  Deleted = "Deleted",
-  Comments = "Comments",
-  Questions = "Questions",
-  Chat = "Chat",
-}
+
 
 export interface ILayout {
   rows: ILayoutRow[];
@@ -35,7 +27,7 @@ interface ILayoutPrivateInfo {
 }
 export interface ILayoutCell {
   [PRIVATE_SYMBOL]?: ILayoutPrivateInfo;
-  viewName?: EViewName;
+  viewName?: string;
   width?: number;
   rows?: ILayoutRow[];
 }
@@ -47,10 +39,12 @@ export interface ILayoutRow {
 }
 interface Props {
   renderView: (props: {
-    viewName: EViewName;
+    viewName: string;
     draggableProps: DraggableProps;
   }) => JSX.Element;
 }
+
+export const EMPTY_VIEW_NAME = "Empty";
 
 export const Layout = ({ renderView }: Props): JSX.Element => {
   const {
@@ -60,7 +54,7 @@ export const Layout = ({ renderView }: Props): JSX.Element => {
   const rows: ILayoutRow[] = useMemo(() => {
     return layoutRows.length
       ? layoutRows
-      : [{ cells: [{ viewName: EViewName.Empty }] }];
+      : [{ cells: [{ viewName: EMPTY_VIEW_NAME }] }];
   }, [layoutRows]);
 
   const notEmptyRows = useMemo(() => rows.filter((f) => f.cells.length > 0), [
@@ -103,7 +97,7 @@ export const Layout = ({ renderView }: Props): JSX.Element => {
     if (cell.rows?.length) {
       return renderRows(cell.rows, true);
     }
-    return renderViewComponent(cell.viewName as EViewName);
+    return renderViewComponent(cell.viewName as string);
   };
 
   const renderRows = (rows: ILayoutRow[], nested = false): JSX.Element => {
@@ -123,7 +117,7 @@ export const Layout = ({ renderView }: Props): JSX.Element => {
     return <div className="layout-rows"> {result}</div>;
   };
 
-  const renderViewComponent = (viewName: EViewName): JSX.Element => {
+  const renderViewComponent = (viewName: string): JSX.Element => {
     return (
       <div key={viewName} className={classNames("layout-view")}>
         <LayoutView
@@ -283,9 +277,9 @@ const CellSeparator = ({
 };
 
 interface ILayoutViewProps {
-  viewName: EViewName;
+  viewName: string;
   dragInfo: IDragInfo | undefined;
-  onCloseClick: (viewName: EViewName) => void;
+  onCloseClick: (viewName: string) => void;
   renderContent: (draggableProps: DraggableProps) => JSX.Element;
 }
 const LayoutView = ({
@@ -298,7 +292,7 @@ const LayoutView = ({
     [dragInfo]
   );
 
-  if (viewName === EViewName.Empty) {
+  if (viewName === EMPTY_VIEW_NAME) {
     return (
       <Droppable info={{ id: viewName }} isDragging={isDragging}></Droppable>
     );

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { ReactNode } from "react";
-import { COLORS, Icon, ICONS, IconType } from "../icon2";
+import { Icon, ICONS, IconType } from "../icon2";
 import "./card.scss";
 
 interface Props {
@@ -26,7 +26,7 @@ export const Card = ({
     if (typeof leftIcon === "string") {
       return (
         <div className="card-header-icon">
-          <Icon name={ICONS[leftIcon]} color={COLORS.WHITE} size={16} />
+          <Icon name={ICONS[leftIcon]} color={"white"} size={16} />
         </div>
       );
     }
@@ -45,7 +45,7 @@ export const Card = ({
           className="card-btn-close no-style round"
           onClick={onCloseClick}
         >
-          <Icon name={ICONS.CLOSE} color={COLORS.WHITE} size={16} />
+          <Icon name={ICONS.CLOSE} color={"white"} size={16} />
         </button>
       </div>
       <div className="card-body">{children}</div>

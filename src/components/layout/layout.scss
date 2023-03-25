@@ -1,7 +1,11 @@
-@import "../../scss/deps";
-
-$layout-container-gap: $ev-gap-x2;
+$layout-container-gap: 8px;
 $layout-grid-gap: ($layout-container-gap / 2);
+
+$ev-gap-x2: 8px;
+
+.d-flex {
+  display: flex;
+}
 
 .layout {
   flex-grow: 1;
@@ -77,9 +81,8 @@ $layout-grid-gap: ($layout-container-gap / 2);
     z-index: 1;
 
     &.dragging {
-      background: rgba($primary, 0.2);
-      border: 1px solid rgba($primary, 0.8);
-      border-radius: 12px;
+      background: rgba(#5ae4ff, 0.2);
+      border: 1px solid rgba(#5ae4ff, 0.8);
     }
   }
 

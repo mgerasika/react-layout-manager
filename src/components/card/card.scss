@@ -1,92 +1,71 @@
-@import "../../scss/deps";
-
 .card {
-  border: 1px solid white;
+  border: 1px solid #888;
   position: relative;
-  padding: 0 $ev-gap-x3;
+  padding: 0 12px;
   overflow-y: auto;
-  background-color: $gray-900;
-  border-radius: 12px;
+  overflow-x: auto;
 
-  &.dragging {
-    background-color: $gray-600;
+  //   &.dragging {
+  //     .card-header {
+  //       background: none;
+  //     }
+  //   }
 
-    .card-header {
-      background: none;
-    }
-  }
+  //   &.card-header-only {
+  //     .card-header {
+  //       border-radius: inherit;
+  //     }
+  //   }
 
-  &.card-header-only {
-    .card-header {
-      border-radius: inherit;
-    }
-  }
-
-  // TODO: temporary styles. Delete after tooltip fix
-  .smart-tooltip-content {
-    z-index: 3;
-  }
+  //   .smart-tooltip-content {
+  //     z-index: 3;
+  //   }
 
   .card-header {
-    @include flex-center($justify-content: null);
+    display: flex;
+    align-items: center;
     position: sticky;
     top: 0;
     z-index: 2;
-    margin: 0 (-$ev-gap-x3);
-    padding: $ev-gap-x4 $ev-gap-x3;
-    background: linear-gradient(
-      180deg,
-      rgba($gray-900, 0.8) 0%,
-      rgba($gray-900, 0.25) 100%
-    );
-    border-radius: 12px 12px 0 0;
-    backdrop-filter: blur(10px);
+    margin: 0 -12px;
+    padding: 16px 12px;
   }
 
   .card-header-icon {
-    @include flex-center(inline-flex);
-    margin: 0 $ev-gap-x2 0 $ev-gap-x1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 8px 0 4px;
     cursor: move;
   }
 
   .card-title {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 18px;
-    font-weight: 700;
-    color: $gray-100;
-
-    .count {
-      @include flex-center(inline-flex, $justify-content: null);
-      margin-left: $ev-gap-x1;
-      font-size: 12px;
-      line-height: 16px;
-      font-weight: 500;
-      color: $gray-400;
-
-      &::before {
-        @include circle(4px, false);
-        content: "";
-        margin-right: $ev-gap-x1;
-        background-color: $gray-400;
-      }
-    }
+    font-weight: 400;
+    color: black;
+    text-transform: capitalize;
   }
 
   .card-btn-close {
     position: absolute;
     top: 50%;
-    right: $ev-gap-x3;
-    padding: $ev-gap-x1;
+    right: 12px;
+    padding: 4px;
     transform: translateY(-50%);
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
   }
 
   .card-body {
-    padding-bottom: $ev-gap-x3;
+    padding-bottom: 12px;
   }
 
   .message-card {
-    margin-top: $ev-gap-x2;
+    margin-top: 8px;
   }
 }

@@ -11,7 +11,7 @@ interface Props {
   className?: string;
   info: IDragInfo;
   isCustomDragElement?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   renderContent?: (props: DraggableProps) => ReactNode;
   onMove?: (props: { x: number; y: number }) => void;
   onDragStart?: (props: {
@@ -53,15 +53,18 @@ export function Draggable({
 
   useEffect(() => {
     if (isDragging && onDragStart && !refIsDragStarted.current) {
-      let el: HTMLElement | null = node.current;
-      while (el) {
-        if (el.className.includes("draggable")) {
-          onDragStart({ node: ({ current: el } as unknown) as any, info });
+      let draggableEl: HTMLElement | null = node.current;
+      while (draggableEl) {
+        if (draggableEl.className.includes("draggable")) {
+          onDragStart({
+            node: ({ current: draggableEl } as unknown) as any,
+            info,
+          });
 
           refIsDragStarted.current = true;
           break;
         }
-        el = el?.parentElement;
+        draggableEl = draggableEl?.parentElement;
       }
     }
   }, [node, isDragging, onDragStart, info]);

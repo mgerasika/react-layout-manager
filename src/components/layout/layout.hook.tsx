@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { EDropArea } from "../drag-and-drop/multi-droppable";
 import { generateUID } from "../generate-uid";
 import {
-  EViewName,
+  EMPTY_VIEW_NAME,
   ILayout,
   ILayoutCell,
   ILayoutRow,
@@ -11,13 +11,13 @@ import {
 } from "./layout.component";
 
 interface IProps {
-  allViews: EViewName[];
+  allViewNames: string[];
   defaultLayout: ILayout;
 }
 
 export interface IDragInfo {
   id: string;
-  viewName?: EViewName;
+  viewName?: string;
   type: "move" | "resize-cell" | "resize-row";
 }
 
@@ -32,10 +32,10 @@ export interface ILayoutRect {
 }
 export interface ILayoutResult {
   rows: ILayoutRow[];
-  moveView: (from: EViewName, to: EViewName, position: EDropArea) => void;
-  closeView: (view: EViewName) => void;
+  moveView: (fromView: string, toView: string, position: EDropArea) => void;
+  closeView: (view: string) => void;
   resetLayout: () => void;
-  hiddenViews: EViewName[];
+  hiddenViews: string[];
   dragInfo: IDragInfo | undefined;
   setDragInfo: (dragInfo: IDragInfo | undefined) => void;
   resizeCell: (props: {
@@ -62,81 +62,12 @@ interface IFindViewResult {
   cellIndex: number;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const EXAMPLE_LAYOUT: ILayout = {
-  rows: [
-    {
-      cells: [
-        {
-          width: 50,
-          rows: [
-            {
-              height: 50,
-              cells: [{ viewName: EViewName.JSON }],
-            },
-            {
-              cells: [
-                { viewName: EViewName.Presenter },
-                { viewName: EViewName.Deleted },
-              ],
-            },
-          ],
-        },
-        {
-          rows: [
-            {
-              cells: [{ viewName: EViewName.Comments }],
-            },
-            {
-              cells: [{ viewName: EViewName.Questions }],
-            },
-          ],
-        },
-        { viewName: EViewName.Chat },
-      ],
-    },
-  ],
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const EXAMPLE_VERTICAL_LAYOUT: ILayout = {
-  rows: [
-    {
-      cells: [{ viewName: EViewName.JSON }],
-    },
-    {
-      cells: [{ viewName: EViewName.Presenter }],
-    },
-    {
-      cells: [{ viewName: EViewName.Deleted }],
-    },
-  ],
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const EXAMPLE_HORIZONTAL_LAYOUT: ILayout = {
-  rows: [
-    {
-      cells: [
-        { viewName: EViewName.JSON },
-        { viewName: EViewName.Presenter },
-        { viewName: EViewName.Deleted },
-      ],
-    },
-  ],
-};
-
-export const DEFAULT_LAYOUT = EXAMPLE_LAYOUT;
-export const ALL_LAYOUT_VIEWS = Object.values(EViewName).filter(
-  (f) => f !== EViewName.Empty
-);
-
 const MAX_PERCENTAGE = 90;
 const MIN_PERCENTAGE = 10;
 const MARGIN = 8;
 export const useLayout = ({
   defaultLayout,
-  allViews,
+  allViewNames: allViews,
 }: IProps): ILayoutResult => {
   const [rows, setRows] = useState<ILayoutRow[]>(
     normalizeLayout(JSON.parse(JSON.stringify(defaultLayout.rows)))
@@ -235,20 +166,24 @@ export const useLayout = ({
         (view) => findView(rows, view) === undefined
       ),
 
-      moveView: (from: EViewName, to: EViewName, position: EDropArea) => {
+      moveView: (
+        fromViewName: string,
+        toViewName: string,
+        position: EDropArea
+      ) => {
         let newRows: ILayoutRow[] = cloneRows(rows);
 
-        if (to === EViewName.Empty) {
+        if (toViewName === EMPTY_VIEW_NAME) {
           newRows.push({
-            cells: [{ viewName: from }],
+            cells: [{ viewName: fromViewName }],
           });
         } else {
-          const toView = findView(newRows, to);
+          const toView = findView(newRows, toViewName);
           if (toView) {
-            const fromView = findView(newRows, from);
+            const fromView = findView(newRows, fromViewName);
             if (fromView) {
               fromView.row.cells = fromView.row.cells.filter(
-                (cell) => cell.viewName !== from
+                (cell) => cell.viewName !== fromViewName
               );
             }
             switch (position) {
@@ -262,14 +197,14 @@ export const useLayout = ({
                           {
                             cells: [
                               {
-                                viewName: from,
+                                viewName: fromViewName,
                               },
                             ],
                           },
                           {
                             cells: [
                               {
-                                viewName: to,
+                                viewName: toViewName,
                               },
                             ],
                           },
@@ -280,7 +215,7 @@ export const useLayout = ({
                   });
                 } else {
                   toView.rows.splice(toView.rowIndex, 0, {
-                    cells: [{ viewName: from }],
+                    cells: [{ viewName: fromViewName }],
                   });
                 }
                 break;
@@ -295,14 +230,14 @@ export const useLayout = ({
                           {
                             cells: [
                               {
-                                viewName: to,
+                                viewName: toViewName,
                               },
                             ],
                           },
                           {
                             cells: [
                               {
-                                viewName: from,
+                                viewName: fromViewName,
                               },
                             ],
                           },
@@ -313,19 +248,19 @@ export const useLayout = ({
                   });
                 } else {
                   toView.rows.splice(toView.rowIndex + 1, 0, {
-                    cells: [{ viewName: from }],
+                    cells: [{ viewName: fromViewName }],
                   });
                 }
                 break;
               }
               case EDropArea.Left:
                 toView.row.cells.splice(toView.cellIndex, 0, {
-                  viewName: from,
+                  viewName: fromViewName,
                 });
                 break;
               case EDropArea.Right:
                 toView.row.cells.splice(toView.cellIndex + 1, 0, {
-                  viewName: from,
+                  viewName: fromViewName,
                 });
                 break;
             }
@@ -334,7 +269,7 @@ export const useLayout = ({
         newRows = normalizeLayout(newRows);
         setRows(newRows);
       },
-      closeView: (view: EViewName) => {
+      closeView: (view: string) => {
         let newRows = cloneRows(rows);
         const result = findView(newRows, view);
         if (result) {
@@ -369,7 +304,7 @@ const findViewInCells = ({
   rows: ILayoutRow[];
   row: ILayoutRow;
   rowIndex: number;
-  view: EViewName;
+  view: string;
 }): IFindViewResult | undefined => {
   let result = undefined;
   for (
@@ -399,7 +334,7 @@ const findViewInCells = ({
 
 const findView = (
   rows: ILayoutRow[],
-  view: EViewName
+  view: string
 ): IFindViewResult | undefined => {
   let result = undefined;
   for (let rowIndex = 0, len = rows.length; rowIndex < len; ++rowIndex) {
