@@ -58,6 +58,7 @@ $ev-gap-x2: 8px;
     position: relative;
     display: flex;
     // flex-direction: column;
+    min-width: 0;
     flex: 1 0 0;
     max-width: 100%;
     padding-right: $layout-grid-gap;
