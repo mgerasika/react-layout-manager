@@ -72,7 +72,6 @@ export function ExampleFull(): JSX.Element {
   return (
     <LayoutContext layout={layout}>
       <div>
-        example full
         <button onClick={handleResetLayout}>Reset layout</button>
         <div>
           {hiddenViews.map((viewName) => (
