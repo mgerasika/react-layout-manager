@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 
+/build/
 # misc
 .DS_Store
 .env.local
