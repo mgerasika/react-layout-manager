@@ -12,8 +12,8 @@ export const EViewName = {
   CodeEditor: "CodeEditor",
   Terminal: "Terminal",
   SolutionExplorer: "SolutionExplorer",
-  Questions: "Questions",
-  Chat: "Chat",
+  Git: "Git",
+  SQL: "SQL",
 };
 
 const EXAMPLE_LAYOUT: ILayout = {
@@ -41,11 +41,11 @@ const EXAMPLE_LAYOUT: ILayout = {
               cells: [{ viewName: EViewName.JSON }],
             },
             {
-              cells: [{ viewName: EViewName.Questions }],
+              cells: [{ viewName: EViewName.Git }],
             },
           ],
         },
-        { viewName: EViewName.Chat },
+        { viewName: EViewName.SQL },
       ],
     },
   ],
@@ -82,7 +82,7 @@ export function ExampleFull(): JSX.Element {
               renderContent={(draggableProps): JSX.Element => {
                 return (
                   <div
-                    className={classNames("cursor-move", {
+                    className={classNames("cursor-move d-flex", {
                       dragging: !!dragInfo,
                     })}
                     {...draggableProps}
