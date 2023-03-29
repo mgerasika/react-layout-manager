@@ -1,7 +1,7 @@
 #for local testing/or local docker container
 image=docker-react-layout-manager
 container=docker-layout-manager
-port=3132
+port=3144
 #should coming from git commit hash
 version=1
 

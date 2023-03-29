@@ -64,7 +64,7 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "build-app": "tsc -p tsconfig.prod.json && react-scripts build",
+    "build-react-app": "tsc -p tsconfig.prod.json && react-scripts build",
     "build:types": "tsc -p tsconfig.prod.json --noEmit false --emitDeclarationOnly true",
     "build:js": "rollup -c --bundleConfigAsCjs",
     "build": "rimraf /dist && yarn build:types && yarn build:js",
