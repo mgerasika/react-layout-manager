@@ -22,13 +22,7 @@ export function ExampleHorizontal(): JSX.Element {
     allViewNames: ["json", "code-editor", "console"],
     defaultLayout: EXAMPLE_HORIZONTAL_LAYOUT,
   });
-  const {
-    rows,
-    closeView,
-    resetLayout,
-    hiddenViews,
-    dragInfo: activeView,
-  } = layout;
+  const { rows, closeView } = layout;
 
   const handleCloseClick = useCallback(
     (view: string) => {

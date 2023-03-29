@@ -24,7 +24,7 @@ export function ExampleVertical(): JSX.Element {
     allViewNames: ["json", "code-editor", "console"],
     defaultLayout: EXAMPLE_VERTICAL_LAYOUT,
   });
-  const { rows, closeView, resetLayout } = layout;
+  const { rows, closeView } = layout;
 
   const handleCloseClick = useCallback(
     (view: string) => {
