@@ -1,7 +1,7 @@
 {
-  "name": "layout-manager",
+  "name": "react-layout-manager2",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "main": "dist/cjs/index.js",
   "type": "module",
   "files": [
@@ -21,6 +21,7 @@
     "@rollup/plugin-typescript": "^11.0.0",
     "classnames": "^2.2.6",
     "node-sass": "4.14.0",
+    "postcss": "^8.4.21",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-color": "2.17.3",
@@ -86,6 +87,7 @@
       "react-app/jest"
     ]
   },
+  "author": "Mykhaylo Gerasika <mgerasika@gmail.com>",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -97,5 +99,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "nvm use 14.20.0 npm uninstall --save-dev node-sass yarn add node-sass   node-sass\": \"^4.14.0\",",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgerasika/layout-manager.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mgerasika/layout-manager/issues"
+  },
+  "homepage": "https://github.com/mgerasika/layout-manager#readme"
 }
