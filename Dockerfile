@@ -3,7 +3,7 @@
 # First Stage : to install and build dependences
 
 # FROM node:alpine as builder TODO invistigate error:0308010C:digital envelope routines::unsupported
-FROM node:16 as builder
+FROM node:14 as builder
 
 COPY . /app/
 
