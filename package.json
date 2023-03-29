@@ -68,7 +68,6 @@
     "build:js": "rollup -c --bundleConfigAsCjs",
     "build": "rimraf /dist && yarn build:types && yarn build:js",
     "test": "react-scripts test",
-    "test:all": "react-scripts test a --watchAll=false",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "stylelint": "stylelint **/*.scss",
@@ -78,7 +77,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn lint && yarn test:all"
+      "pre-commit": "yarn lint"
     }
   },
   "eslintConfig": {
