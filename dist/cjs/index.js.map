@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../src/lib/index.tsx"],"sourcesContent":["export const demo = (): JSX.Element => <div>hello</div>;\n"],"names":["React","createElement"],"mappings":"0BAAoB,IAAmBA,MAAhCC,cAAA,MAAA,KAAA"}

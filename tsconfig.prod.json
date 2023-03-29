@@ -4,6 +4,7 @@
     "node_modules",
     "**/*stories.tsx",
     "**/*spec.ts",
-    "**/*spec.tsx"
+    "**/*spec.tsx",
+    "**/example/**"
   ]
 }
