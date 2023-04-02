@@ -6,7 +6,7 @@ import "./index.css";
 const App: React.FC = () => {
   return (
     <Suspense fallback="">
-      <div className="App" style={{ pointerEvents: "auto" }}>
+      <div className="App">
         <Router>
           <Switch>
             <Route path="/">
