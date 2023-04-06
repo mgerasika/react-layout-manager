@@ -35,7 +35,5 @@ const layout = useLayout({
 ```
 
 ### 3. Result
-```
 ![image](https://user-images.githubusercontent.com/10614750/230370032-26a1a2d7-5c4b-4461-a8cb-928afae41e99.png)
 
-```
