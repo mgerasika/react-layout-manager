@@ -1,13 +1,13 @@
 import { useDraggable } from "@dnd-kit/core";
 import classNames from "classnames";
 import React, { ReactNode, useEffect, useMemo, useRef } from "react";
-import { IDragInfo } from "../layout/layout.hook";
+import { IDragInfo } from "../interfaces/drag-info.interface";
 
 export type DraggableProps = ReturnType<typeof useDraggable>["listeners"] &
   ReturnType<typeof useDraggable>["attributes"] & {
     ref: ReturnType<typeof useDraggable>["setNodeRef"];
   };
-interface Props {
+interface IProps {
   className?: string;
   info: IDragInfo;
   isCustomDragElement?: boolean;
@@ -27,7 +27,7 @@ export function Draggable({
   className,
   onMove,
   onDragStart,
-}: Props): JSX.Element {
+}: IProps): JSX.Element {
   const refIsDragStarted = useRef(false);
   const { attributes, listeners, setNodeRef, transform, node } = useDraggable({
     id: JSON.stringify(info),

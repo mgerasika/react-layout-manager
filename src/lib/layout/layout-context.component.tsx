@@ -2,21 +2,19 @@ import { DndContext, Modifier } from "@dnd-kit/core";
 import { LayoutRectMap } from "@dnd-kit/core/dist/store";
 import { LayoutRect } from "@dnd-kit/core/dist/types";
 import React, { MutableRefObject, ReactNode, useMemo, useRef } from "react";
-import { EDropArea } from "../multi-droppable/multi-droppable.component";
-import { EMPTY_VIEW_NAME } from "./layout.component";
-import {
-  IDragInfo,
-  IDropInfo,
-  ILayoutRect,
-  ILayoutResult,
-} from "./layout.hook";
+import { EMPTY_VIEW_NAME } from "../constants/empty-view.constant";
+import { EDropArea } from "../enums/drop-area.enum";
+import { IDragInfo } from "../interfaces/drag-info.interface";
+import { IDropInfo } from "../interfaces/drop-info.interface";
+import { ILayoutRect } from "../interfaces/layout-rect.interface";
+import { ILayoutResult } from "./layout.hook";
 
-interface Props {
+interface IProps {
   layout: ILayoutResult;
   children: ReactNode;
 }
 
-export const LayoutContext = ({ layout, children }: Props): JSX.Element => {
+export const LayoutContext = ({ layout, children }: IProps): JSX.Element => {
   const { setDragInfo, moveView, resizeCell, resizeRow, dragInfo } = layout;
   const parentSizeRef = useRef<LayoutRect | undefined>();
   const currentSizeRef = useRef<LayoutRect | undefined>();
@@ -67,32 +65,21 @@ export const LayoutContext = ({ layout, children }: Props): JSX.Element => {
       return [];
     }
     const keys = Array.from(layoutRectMapRef.current!.keys());
-    return keys.map<ILayoutRect>(
-      (key): ILayoutRect => {
-        const rect = layoutRectMapRef.current!.get(key);
+    return keys.map<ILayoutRect>((key): ILayoutRect => {
+      const rect = layoutRectMapRef.current!.get(key);
 
-        const dropInfo = JSON.parse(key);
-        return {
-          info: dropInfo,
-          rect: rect!,
-        };
-      }
-    );
+      const dropInfo = JSON.parse(key);
+      return {
+        info: dropInfo,
+        rect: rect!,
+      };
+    });
   };
 
   const modifier: Modifier = ({ transform, draggingNodeRect }) => {
     if (dragInfo) {
       if (parentSizeRef.current && draggingNodeRect) {
         if (dragInfo.type === "resize-cell") {
-          // console.log({
-          // 	parent: parentSizeRef.current,
-          // 	right: draggingNodeRect.right,
-          // 	draggingNodeRect,
-          // 	containerNodeRect,
-          // 	activeNodeRect,
-          // 	transform,
-          // });
-
           return {
             ...transform,
           };
@@ -186,7 +173,7 @@ export interface IDoStartDragEventArgs {
   info: IDragInfo;
 }
 export const LayoutResultContext = React.createContext<ILayoutContext>({
-  layout: (undefined as unknown) as ILayoutResult,
+  layout: undefined as unknown as ILayoutResult,
   doDragStart: (props: IDoStartDragEventArgs) => {
     console.log(props);
   },

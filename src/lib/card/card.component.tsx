@@ -7,7 +7,7 @@ interface Props {
   leftIcon?: IconType | JSX.Element;
   title: string;
   count?: number;
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
   onCloseClick?: () => void;
 }

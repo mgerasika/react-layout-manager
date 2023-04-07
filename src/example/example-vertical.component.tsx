@@ -1,8 +1,9 @@
 import { useCallback } from "react";
 import { Card } from "../lib/card/card.component";
 import { Icon, ICONS } from "../lib/icon.component";
+import { ILayout } from "../lib/interfaces/layout.interface";
 import { LayoutContext } from "../lib/layout/layout-context.component";
-import { ILayout, Layout } from "../lib/layout/layout.component";
+import { Layout } from "../lib/layout/layout.component";
 import { useLayout } from "../lib/layout/layout.hook";
 
 const EXAMPLE_VERTICAL_LAYOUT: ILayout = {

@@ -1,13 +1,9 @@
 import { Droppable } from "../droppable/droppable.component";
+import { EDropArea } from "../enums/drop-area.enum";
 import "./multi-droppable.scss";
 
-export enum EDropArea {
-  Top = "Top",
-  Left = "Left",
-  Right = "Right",
-  Bottom = "Bottom",
-}
-interface Props {
+
+interface IProps {
   id: string;
   className?: string;
   isDragging?: boolean;
@@ -17,7 +13,7 @@ export function MultiDroppable({
   children,
   id,
   isDragging,
-}: Props): JSX.Element {
+}: IProps): JSX.Element {
   return (
     <div className="full-height relative">
       {isDragging && (

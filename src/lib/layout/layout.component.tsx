@@ -1,50 +1,25 @@
-import { useDroppable } from "@dnd-kit/core";
 import classNames from "classnames";
-import React, {
-  MutableRefObject,
-  useCallback,
-  useContext,
-  useMemo,
-} from "react";
-import { Draggable, DraggableProps } from "../draggable/draggable.component";
-import { Droppable } from "../droppable/droppable.component";
-import { MultiDroppable } from "../multi-droppable/multi-droppable.component";
-import {
-  IDoStartDragEventArgs,
-  LayoutResultContext,
-} from "./layout-context.component";
-import { IDragInfo } from "./layout.hook";
+import { MutableRefObject, useCallback, useContext, useMemo } from "react";
+import { EMPTY_VIEW_NAME } from "../constants/empty-view.constant";
+import { PRIVATE_SYMBOL } from "../constants/private-symbol.constant";
+import { DraggableProps } from "../draggable/draggable.component";
+import { IDragInfo } from "../interfaces/drag-info.interface";
+import { ILayoutCell } from "../interfaces/layout-cell.interface";
+import { ILayoutRow } from "../interfaces/layout-row.interface";
+import { LayoutCell } from "./layout-cell.component";
+import { LayoutResultContext } from "./layout-context.component";
+import { LayoutRow } from "./layout-row.component";
+import { LayoutView } from "./layout-view.component";
 import "./layout.scss";
 
-export interface ILayout {
-  rows: ILayoutRow[];
-}
-export const PRIVATE_SYMBOL = Symbol("PRIVATE_SYMBOL");
-interface ILayoutPrivateInfo {
-  tempId: string;
-}
-export interface ILayoutCell {
-  [PRIVATE_SYMBOL]?: ILayoutPrivateInfo;
-  viewName?: string;
-  width?: number;
-  rows?: ILayoutRow[];
-}
-
-export interface ILayoutRow {
-  [PRIVATE_SYMBOL]?: ILayoutPrivateInfo;
-  cells: ILayoutCell[];
-  height?: number;
-}
-interface Props {
+interface IProps {
   renderView: (props: {
     viewName: string;
     draggableProps: DraggableProps;
   }) => JSX.Element;
 }
 
-export const EMPTY_VIEW_NAME = "Empty";
-
-export const Layout = ({ renderView }: Props): JSX.Element => {
+export const Layout = ({ renderView }: IProps): JSX.Element => {
   const {
     layout: { dragInfo: dragInfo, closeView, rows: layoutRows },
     doDragStart: doStartDrag,
@@ -131,181 +106,4 @@ export const Layout = ({ renderView }: Props): JSX.Element => {
     );
   };
   return <div className="layout">{renderRows(notEmptyRows)}</div>;
-};
-
-interface ILayoutRowProps {
-  row: ILayoutRow;
-  isLastRow: boolean;
-  dragInfo: IDragInfo | undefined;
-  nested: boolean;
-  renderCells: (cells: ILayoutCell[], nested: boolean) => JSX.Element;
-  onDragStart: (props: IDoStartDragEventArgs) => void;
-}
-const LayoutRow = ({
-  row,
-  dragInfo,
-  renderCells,
-  nested,
-  isLastRow,
-  onDragStart,
-}: ILayoutRowProps): JSX.Element => {
-  const { setNodeRef } = useDroppable({
-    id: JSON.stringify({ id: row[PRIVATE_SYMBOL]?.tempId }),
-  });
-  return (
-    <div
-      ref={setNodeRef}
-      className="layout-row full-height"
-      style={{
-        height: row.height ? row.height + "%" : undefined,
-        minHeight: row.height ? row.height + "%" : undefined,
-        maxHeight: row.height ? row.height + "%" : undefined,
-      }}
-    >
-      <div className="layout-cells">{renderCells(row.cells, nested)}</div>
-      {!isLastRow && (
-        <RowSeparator row={row} dragInfo={dragInfo} onDragStart={onDragStart} />
-      )}
-    </div>
-  );
-};
-
-interface ILayoutCellProps {
-  cell: ILayoutCell;
-  isLastCell: boolean;
-  dragInfo: IDragInfo | undefined;
-  nested: boolean;
-  renderCellContent: (cell: ILayoutCell) => JSX.Element;
-  onDragStart: (props: IDoStartDragEventArgs) => void;
-}
-const LayoutCell = ({
-  cell,
-  dragInfo,
-  nested,
-  renderCellContent,
-  isLastCell,
-  onDragStart,
-}: ILayoutCellProps): JSX.Element => {
-  const { setNodeRef } = useDroppable({
-    id: JSON.stringify({ id: cell[PRIVATE_SYMBOL]?.tempId }),
-  });
-  return (
-    <div
-      ref={setNodeRef}
-      style={{
-        flexBasis: cell.width ? cell.width + "%" : undefined,
-        maxWidth: cell.width ? cell.width + "%" : undefined,
-      }}
-      className={classNames("layout-cell", {
-        "root-level": !nested,
-      })}
-    >
-      {renderCellContent(cell)}
-      {!isLastCell && (
-        <CellSeparator
-          cell={cell}
-          dragInfo={dragInfo}
-          onDragStart={onDragStart}
-        />
-      )}
-    </div>
-  );
-};
-interface IRowSeparatorProps {
-  row: ILayoutRow;
-  dragInfo: IDragInfo | undefined;
-  onDragStart: (props: IDoStartDragEventArgs) => void;
-}
-const RowSeparator = ({
-  row,
-  dragInfo,
-  onDragStart,
-}: IRowSeparatorProps): JSX.Element => {
-  const isDragging =
-    dragInfo?.type === "resize-row" &&
-    dragInfo.id === row[PRIVATE_SYMBOL]!.tempId;
-  return (
-    <Draggable
-      info={{ id: row[PRIVATE_SYMBOL]!.tempId, type: "resize-row" }}
-      className={classNames("layout-separator layout-separator-row", {
-        dragging: isDragging,
-      })}
-      onDragStart={onDragStart}
-      isCustomDragElement={true}
-      renderContent={(draggableProps) => (
-        <div style={{ width: "100%" }} {...draggableProps}></div>
-      )}
-    >
-      {" "}
-    </Draggable>
-  );
-};
-
-interface ICellSeparatorProps {
-  cell: ILayoutCell;
-  dragInfo: IDragInfo | undefined;
-  onDragStart: (props: IDoStartDragEventArgs) => void;
-}
-const CellSeparator = ({
-  cell,
-  dragInfo,
-  onDragStart,
-}: ICellSeparatorProps): JSX.Element => {
-  const isDragging =
-    dragInfo?.type === "resize-cell" &&
-    dragInfo.id == cell[PRIVATE_SYMBOL]!.tempId;
-  return (
-    <Draggable
-      className={classNames("layout-separator layout-separator-cell", {
-        dragging: isDragging,
-      })}
-      onDragStart={onDragStart}
-      info={{
-        id: cell[PRIVATE_SYMBOL]!.tempId,
-        type: "resize-cell",
-        viewName: cell.viewName,
-      }}
-      isCustomDragElement={true}
-      renderContent={(draggableProps) => (
-        <div style={{ width: "100%" }} {...draggableProps}></div>
-      )}
-    >
-      {" "}
-    </Draggable>
-  );
-};
-
-interface ILayoutViewProps {
-  viewName: string;
-  dragInfo: IDragInfo | undefined;
-  onCloseClick: (viewName: string) => void;
-  renderContent: (draggableProps: DraggableProps) => JSX.Element;
-}
-const LayoutView = ({
-  dragInfo,
-  viewName,
-  renderContent,
-}: ILayoutViewProps): JSX.Element => {
-  const isDragging = useMemo<boolean>(
-    () => !!(dragInfo?.id && dragInfo.type === "move"),
-    [dragInfo]
-  );
-
-  if (viewName === EMPTY_VIEW_NAME) {
-    return (
-      <Droppable info={{ id: viewName }} isDragging={isDragging}></Droppable>
-    );
-  }
-
-  return (
-    <MultiDroppable id={viewName} isDragging={isDragging}>
-      <Draggable
-        info={{ id: viewName, type: "move" }}
-        isCustomDragElement={true}
-        renderContent={renderContent}
-      >
-        {" "}
-      </Draggable>
-    </MultiDroppable>
-  );
 };

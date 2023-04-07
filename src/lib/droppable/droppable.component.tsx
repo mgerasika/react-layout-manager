@@ -1,15 +1,15 @@
 import { useDroppable } from '@dnd-kit/core';
 import { ReactNode } from 'react';
-import { IDropInfo } from '../layout/layout.hook';
+import { IDropInfo } from '../interfaces/drop-info.interface';
 
 import './droppable.scss';
 
-interface Props {
+interface IProps {
 	info: IDropInfo;
 	children?: ReactNode;
 	isDragging?: boolean;
 }
-export  function Droppable({info, children}: Props): JSX.Element {
+export  function Droppable({info, children}: IProps): JSX.Element {
 	const { isOver, setNodeRef } = useDroppable({
 		id : JSON.stringify(info),
 	});

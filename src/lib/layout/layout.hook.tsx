@@ -1,35 +1,20 @@
 import { Coordinates, LayoutRect } from "@dnd-kit/core/dist/types";
 import { useMemo, useState } from "react";
+import { EMPTY_VIEW_NAME } from "../constants/empty-view.constant";
+import { PRIVATE_SYMBOL } from "../constants/private-symbol.constant";
+import { EDropArea } from "../enums/drop-area.enum";
 import { generateUID } from "../generate-uid.util";
-import { EDropArea } from "../multi-droppable/multi-droppable.component";
-import {
-  EMPTY_VIEW_NAME,
-  ILayout,
-  ILayoutCell,
-  ILayoutRow,
-  PRIVATE_SYMBOL,
-} from "./layout.component";
+import { IDragInfo } from "../interfaces/drag-info.interface";
+import { ILayoutCell } from "../interfaces/layout-cell.interface";
+import { ILayoutRect } from "../interfaces/layout-rect.interface";
+import { ILayoutRow } from "../interfaces/layout-row.interface";
+import { ILayout } from "../interfaces/layout.interface";
 
 interface IProps {
   allViewNames: string[];
   defaultLayout: ILayout;
 }
 
-export interface IDragInfo {
-  id: string;
-  viewName?: string;
-  type: "move" | "resize-cell" | "resize-row";
-}
-
-export interface IDropInfo {
-  id: string;
-  dropArea?: EDropArea | undefined;
-}
-
-export interface ILayoutRect {
-  info: IDropInfo;
-  rect: LayoutRect;
-}
 export interface ILayoutResult {
   rows: ILayoutRow[];
   moveView: (fromView: string, toView: string, position: EDropArea) => void;
