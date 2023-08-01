@@ -1,5 +1,5 @@
 ## React layout manager - is library for splitting your scrreen on draggable & resizable content/
-### Try online demo (https://react-layout-manager.herokuapp.com/)
+### Try online demo ([https://react-layout-manager.web.app/](https://react-layout-manager.web.app/))
 ![image](https://user-images.githubusercontent.com/10614750/230366968-b826feb3-35f5-41c5-a461-c651eb74866c.png)
 ## Usage
 ### 1. Create some layout layout object.
