@@ -47,7 +47,7 @@ export function ExampleFull(): JSX.Element {
     allViewNames: Object.values(EViewName),
     defaultLayout: EXAMPLE_LAYOUT,
   });
-  const { rows, closeView, resetLayout, hiddenViews, dragInfo } = layout;
+  const { closeView, resetLayout, hiddenViews, dragInfo } = layout;
 
   const handleCloseClick = useCallback(
     (view: string) => {
