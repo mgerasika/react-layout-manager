@@ -1,10 +1,10 @@
 .card {
   border: 1px solid #888;
   position: relative;
-  padding: 0 12px;
   overflow-y: auto;
   overflow-x: auto;
   width: 100%;
+  padding-top:6px;
 
   //   &.dragging {
   //     .card-header {
@@ -28,8 +28,6 @@
     position: sticky;
     top: 0;
     z-index: 2;
-    margin: 0 -12px;
-    padding: 16px 12px;
   }
 
   .card-header-icon {
@@ -37,7 +35,7 @@
     align-items: center;
     justify-content: center;
 
-    margin: 0 8px 0 4px;
+    margin: 0 4px 0 4px;
     cursor: move;
   }
 
@@ -54,7 +52,7 @@
   .card-btn-close {
     position: absolute;
     top: 50%;
-    right: 12px;
+    right: 2px;
     padding: 4px;
     transform: translateY(-50%);
     background-color: transparent;
